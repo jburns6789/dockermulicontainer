@@ -23,28 +23,28 @@ jobs:
           context: ./client
           file: ./client/Dockerfile.dev
           push: true
-          tags: ${{ DOCKER_TAG }}/multicontainerdeploy-client:7-25
+          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-client:7-25
 
       - name: Build and push nginx image
         uses: docker/build-push-action@v5
         with:
           context: ./nginx
           push: true
-          tags: ${{ DOCKER_TAG }}/multicontainerdeploy-nginx:7-25
+          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-nginx:7-25
 
       - name: Build and push server image
         uses: docker/build-push-action@v5
         with:
           context: ./server
           push: true
-          tags: ${{ DOCKER_TAG }}/multicontainerdeploy-server:7-25
+          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-server:7-25
 
       - name: Build and push worker image
         uses: docker/build-push-action@v5
         with:
           context: ./worker
           push: true
-          tags: ${{ DOCKER_TAG }}/multicontainerdeploy-worker:7-25
+          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-worker:7-25
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
