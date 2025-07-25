@@ -23,7 +23,7 @@ jobs:
           context: ./client
           file: ./client/Dockerfile.dev
           push: true
-          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-client:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-client:7-25
 
 
       - name: Build and push nginx image
@@ -31,7 +31,7 @@ jobs:
         with:
           context: ./nginx
           push: true
-          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-nginx:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-nginx:7-25
 
 
       - name: Build and push server image
@@ -39,7 +39,7 @@ jobs:
         with:
           context: ./server
           push: true
-          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-server:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-server:7-25
 
 
       - name: Build and push worker image
@@ -47,7 +47,7 @@ jobs:
         with:
           context: ./worker
           push: true
-          tags: ${{ secrets.DOCKER_TAG }}/multicontainerdeploy-worker:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-worker:7-25
 
 
       - name: Generate deployment package
