@@ -57,9 +57,11 @@ jobs:
         uses: einaregilsson/beanstalk-deploy@v18
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           application_name: multi-container
           environment_name: Multi-container-env
+
           existing_bucket_name: elasticbeanstalk-us-east-2-526802959187
           region: us-east-2
           version_label: ${{ github.sha }}
