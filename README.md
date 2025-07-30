@@ -19,3 +19,14 @@ ports:
  -'3050:80'
 
  more explict mapping is required w/ AWS configs
+
+ AWS Configs to subout redis w/ elastic cache and postgres w/ RDS
+ advantages:
+    redis: --> production grade
+        redis is created and maintained, easy to scale, built in logs maintenance,
+        secure, EB migration
+    postgres:
+        instance is created and maintained, scalable, built in logging/maintainence,
+        secure, automated backups, EB migration
+
+A new security group needs to be created and configured to allow for EB, RDS and EC(Redis) to commuincate
