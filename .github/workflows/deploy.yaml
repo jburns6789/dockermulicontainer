@@ -23,7 +23,7 @@ jobs:
           context: ./client
           file: ./client/Dockerfile.dev
           push: true
-          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-client:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-client:latest
 
 
       - name: Build and push nginx image
@@ -31,7 +31,7 @@ jobs:
         with:
           context: ./nginx
           push: true
-          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-nginx:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-nginx:latest
 
 
       - name: Build and push server image
@@ -39,7 +39,7 @@ jobs:
         with:
           context: ./server
           push: true
-          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-server:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-server:latest
 
 
       - name: Build and push worker image
@@ -47,7 +47,7 @@ jobs:
         with:
           context: ./worker
           push: true
-          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-worker:7-25
+          tags: ${{ secrets.DOCKER_USER_ID }}/multicontainerdeploy-worker:latest
 
 
       - name: Generate deployment package
@@ -57,10 +57,9 @@ jobs:
         uses: einaregilsson/beanstalk-deploy@v18
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.SECRET_ACCESS_KEY }}
-          application_name: multi-container
-          environment_name: Multi-container-env
-
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: multi-docker
+          environment_name: Multi-docker-env
           existing_bucket_name: elasticbeanstalk-us-east-2-526802959187
           region: us-east-2
           version_label: ${{ github.sha }}
