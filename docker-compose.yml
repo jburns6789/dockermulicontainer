@@ -14,7 +14,7 @@ services:
       - PGUSER=$PGUSER
       - PGHOST=$PGHOST
       - PGDATABASE=$PGDATABASE
-      - POSTGRES_PASSWORD=$PGPASSWORD
+      - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
     image: "jbur645/multicontainerdeploy-worker"
