@@ -47,10 +47,20 @@ pgClient.on('connect', (client) => {
 const redisClient = createClient({
     url: `redis://${keys.redisHost}:${keys.redisPort}`
 });
+redisClient.on('error', (err) => {
+    console.error('Redis Client Error', err);
+});
 await redisClient.connect();
 
 const redisPublisher = redisClient.duplicate();
+redisPublisher.on('error', (err) => {
+    console.error('Redis Publisher Error', err);
+});
 await redisPublisher.connect();
+
+redisPublisher.on('error', (err) => {
+    console.error('Redis Publisher Error', err);
+  });
 
 // Express route handler
 app.get('/', (req, res) => {
@@ -58,9 +68,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/values/all', async (req, res) => {
+    try {
     const values = await pgClient.query('SELECT * from values');
-
     res.send(values.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Postgres error");
+    }
 });
 
 app.get('/values/current', async (req, res) => {
@@ -82,7 +96,7 @@ app.post('/values', async (req, res) => {
     res.send({ working: true });
 });
 
-app.listen(5000, () => {
+app.listen(5000, '0.0.0.0', () => {
     console.log('Listening on port 5000');
 });
 
