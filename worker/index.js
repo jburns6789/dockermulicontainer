@@ -10,7 +10,7 @@ function fib(index) {
 (async () => {
   // Main Redis client for normal commands
   const redisClient = createClient({
-    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+    url: `rediss://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     pingInterval: 10000 // Keepalive to avoid idle disconnects
   });
 
