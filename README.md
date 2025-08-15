@@ -38,7 +38,9 @@ Once internal proxying was stable, the primary obstacle became the network conne
 
 With the network paths open, a final application-level issue was revealed. The server and worker were still failing to connect to Redis, but this time without a timeout. Detailed logging added to the Node.js startup sequence pinpointed the failure to the Redis client connection attempt. The root cause was discovered to be a mismatch in connection security: AWS ElastiCache had in-transit encryption enabled by default, requiring a secure TLS connection. The application, however, was attempting an unencrypted connection. The final fix was a one-line code change in both the server and worker to update the connection string protocol from redis:// to the secure rediss://. This allowed the clients to establish a TLS connection, successfully bringing the entire application stack online and resolving all errors.
 
-paste.txt
+Imperative Appraoch vs Declartive Approach 
+Maintaining the "master list/task schedule" There SHOULD be 3 containers using multi worker. -> There should be 5 containers using multiworker ->
+There should be 4 containers using  multworker -> There shoulder be 4 containers using multiworker networked to mutliredis -> There should be 4 containers using mutli worker using v1.23 networked to multi redis. Declartive is the industry standard.
 
 
 
