@@ -1,3 +1,13 @@
+How to run the dev version:
+docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-dev.yml up --build
+docker-compose -f docker-compose-dev.yml down
+docker network prune id stuck between dev and production network
+
+TLS for worker and the server need to be configured for production
+
+access once booted up http://localhost:3050/
+
 Production level devops, docker, elastic beanstalk, nginx, express, postgres, redis, react. Simple frontend functionality.
 
 Dockerrun.aws.json, define container definintions ---> Amazon EB
@@ -43,19 +53,6 @@ each entry can optionally get docker-conpose to build an image
 each entry represents a container we want to create
 each entry defines the networking requirements(ports)
 
-Kubernetes:
-K8 expects all images to be built
-one config file per object we want to create
-we have to manually setup all networking
-
-Get a simple container running on local k8 cluster:
-image needs to be hosted on docker hub
-make one config file to create the container
-make one config file to setup the network
-
 Imperative Appraoch vs Declartive Approach 
 Maintaining the "master list/task schedule" There SHOULD be 3 containers using multi worker. -> There should be 5 containers using multiworker ->
 There should be 4 containers using  multworker -> There shoulder be 4 containers using multiworker networked to mutliredis -> There should be 4 containers using mutli worker using v1.23 networked to multi redis. Declartive is the industry standard.
-
-
-

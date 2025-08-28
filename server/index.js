@@ -42,8 +42,13 @@ console.log('[SERVER] Postgres client configured.');
 
 
 // --- Redis Client Setup ---
+// -------- No TLS in dev version --------
+//  url: `redis://${keys.redisHost}:${keys.redisPort}`,
+// -------- Production Version --------
+//  url: `rediss://${keys.redisHost}:${keys.redisPort}`,
+
 const redisClient = createClient({
-    url: `rediss://${keys.redisHost}:${keys.redisPort}`,
+    url: `redis://${keys.redisHost}:${keys.redisPort}`,
     socket: {
         connectTimeout: 50000,
         reconnectStrategy: retries => Math.min(retries * 50, 1000)

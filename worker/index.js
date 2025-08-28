@@ -9,8 +9,12 @@ function fib(index) {
 
 (async () => {
   // Main Redis client for normal commands
+  // No TLS for Development
+  // url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+  // TLS Version 
+  // url: `rediss://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
   const redisClient = createClient({
-    url: `rediss://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     pingInterval: 10000 // Keepalive to avoid idle disconnects
   });
 
